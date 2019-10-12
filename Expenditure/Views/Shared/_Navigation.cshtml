@@ -1,0 +1,51 @@
+﻿@*AÇIKLMA----
+
+
+
+*@
+
+
+@using Microsoft.AspNet.Identity
+
+<nav class="navbar-default navbar-static-side" role="navigation">
+    <div class="sidebar-collapse">
+        <ul class="nav metismenu" id="side-menu">
+            <li class="nav-header">
+                <div class="dropdown profile-element">
+                    <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                        <span class="block m-t-xs font-bold"> @User.Identity.GetUserName() </span>
+                        <span class="text-muted text-xs block">Title <b class="caret"></b></span>
+                    </a>
+                    <ul class="dropdown-menu animated fadeInRight m-t-xs" style="position: absolute; top: 91px; left: 0px; will-change: top, left;">
+                        <li><a class="dropdown-item" href="@Url.Action("LogOff","Account")">Logout</a></li>
+                    </ul>
+                </div>
+                <div class="logo-element">
+                    EX+
+                </div>
+            </li>
+            @if (Request.IsAuthenticated)
+            {
+                <li class="@Html.IsSelected(controller: "Dashboard", action: "Index")">
+                    <a href="@Url.Action("Index", "Dashboard")"><i class="fa fa-line-chart"></i> <span class="nav-label">Dashboard</span> <span class="label label-primary float-right">Main</span></a>
+                </li>
+                <li class="@Html.IsSelected(controller: "Transactions", action: "Index")">
+                    <a href="@Url.Action("Index", "Transactions")"><i class="fa fa-list"></i> <span class="nav-label">Transactions</span> </a>
+                </li>
+                <li class="@Html.IsSelected(controller: "Transactions", action: "Create")">
+                    <a href="@Url.Action("Create", "Transactions")"><i class="fa fa-plus"></i> <span class="nav-label">Add Transaction</span></a>
+                </li>
+
+            }
+            else
+            {
+                <li class="@Html.IsSelected(controller: "Login", action: "Account")">
+                    <a href="@Url.Action("Login", "Account")"><i class="fa fa-lock"></i> <span class="nav-label">Please Login</span> </a>
+                </li>
+            }
+
+
+
+        </ul>
+    </div>
+</nav>
